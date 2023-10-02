@@ -8,6 +8,24 @@ export default class Tree {
     this.root = this.buildTree(arr);
   }
 
+  removeDuplicates(arr) {
+    let n = arr.length;
+    if (n.length == 0 || n.length == 1) {
+      return arr;
+    }
+
+    let temp = new Array();
+    let counter = 0;
+
+    for (let i = 0; i < n - 1; i++) {
+      if (arr[i] != arr[i + 1]) {
+        temp[counter++] = arr[i];
+      }
+    }
+    arr = temp;
+    console.log(arr);
+  }
+
   buildTree(arr, start = 0, end = arr.length - 1) {
     if (start > end) {
       return null;
@@ -38,4 +56,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-prettyPrint(BST.root);
+const testTwo = [1, 2, 2, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9];
+
+BST.removeDuplicates(testTwo);
+// prettyPrint(BST.root);
