@@ -8,6 +8,15 @@ export default class Tree {
     this.root = this.buildTree(arr);
   }
 
+  cleanseArr(arr) {
+    //conduct sorting and duplication removal via this method
+    //chain this to arr being passed into buildTree above once sort is implemented
+  }
+
+  sortArr(arr) {
+    // sort arr here, possibly merge sort? -- look into best use case
+  }
+
   removeDuplicates(arr) {
     let n = arr.length;
     if (n.length == 0 || n.length == 1) {
@@ -56,7 +65,8 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-const testTwo = [1, 2, 2, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9];
 
-BST.removeDuplicates(testTwo);
+// const testTwo = [1, 2, 2, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9];
+// BST.removeDuplicates(testTwo);
+
 // prettyPrint(BST.root);
