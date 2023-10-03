@@ -5,34 +5,10 @@ const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 export default class Tree {
   constructor(arr) {
-    this.root = this.buildTree(arr);
-  }
-
-  cleanseArr(arr) {
-    //conduct sorting and duplication removal via this method
-    //chain this to arr being passed into buildTree above once sort is implemented
-  }
-
-  sortArr(arr) {
-    // sort arr here, possibly merge sort? -- look into best use case
-  }
-
-  removeDuplicates(arr) {
-    let n = arr.length;
-    if (n.length == 0 || n.length == 1) {
-      return arr;
-    }
-
-    let temp = new Array();
-    let counter = 0;
-
-    for (let i = 0; i < n - 1; i++) {
-      if (arr[i] != arr[i + 1]) {
-        temp[counter++] = arr[i];
-      }
-    }
-    arr = temp;
     console.log(arr);
+    const sortedArr = [...new Set(arr)].sort((a, b) => a - b);
+    console.log(sortedArr);
+    this.root = this.buildTree(sortedArr);
   }
 
   buildTree(arr, start = 0, end = arr.length - 1) {
@@ -65,8 +41,4 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-
-// const testTwo = [1, 2, 2, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9];
-// BST.removeDuplicates(testTwo);
-
 // prettyPrint(BST.root);
