@@ -5,7 +5,7 @@ const testArr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 
 export default class Tree {
   constructor(arr) {
-    console.log(arr);
+    // console.log(arr);
     const sortedArr = [...new Set(arr)].sort((a, b) => a - b);
     console.log(sortedArr);
     this.root = this.buildTree(sortedArr);
@@ -16,13 +16,33 @@ export default class Tree {
       return null;
     }
 
-    let mid = Math.floor(parseInt((start + end) / 2));
+    let mid = Math.floor((start + end) / 2);
     const newNode = new Node(sortedArr[mid]);
 
     newNode.left = this.buildTree(sortedArr, start, mid - 1);
     newNode.right = this.buildTree(sortedArr, mid + 1, end);
 
     return newNode;
+  }
+
+  insert(data) {
+    let root = this.root;
+    root = this.insertRec(root, data);
+  }
+
+  insertRec(root, data) {
+    if (root == null) {
+      root = new Node(data);
+      return root;
+    }
+
+    if (root.data > data) {
+      root.left = this.insertRec(root.left, data);
+    } else if (root.data < data) {
+      root.right = this.insertRec(root.right, data);
+    }
+
+    return root;
   }
 }
 
@@ -41,5 +61,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-
+BST.insert(45);
 prettyPrint(BST.root);
