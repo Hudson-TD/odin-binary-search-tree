@@ -11,18 +11,18 @@ export default class Tree {
     this.root = this.buildTree(sortedArr);
   }
 
-  buildTree(arr, start = 0, end = arr.length - 1) {
+  buildTree(sortedArr, start = 0, end = sortedArr.length - 1) {
     if (start > end) {
       return null;
     }
 
     let mid = Math.floor(parseInt((start + end) / 2));
-    const root = new Node(arr[mid]);
+    const newNode = new Node(sortedArr[mid]);
 
-    root.left = this.buildTree(arr, start, mid - 1);
-    root.right = this.buildTree(arr, mid + 1, end);
+    newNode.left = this.buildTree(sortedArr, start, mid - 1);
+    newNode.right = this.buildTree(sortedArr, mid + 1, end);
 
-    return root;
+    return newNode;
   }
 }
 
@@ -41,4 +41,5 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-// prettyPrint(BST.root);
+
+prettyPrint(BST.root);
