@@ -145,8 +145,6 @@ const BST = new Tree(testArr);
 // console.log(BST);
 prettyPrint(BST.root);
 
-// BST.find(14);
-
 // Testing insert(data), delete(data)
 // BST.insert(69);
 // BST.insert(12);
@@ -156,5 +154,12 @@ prettyPrint(BST.root);
 // prettyPrint(BST.root);
 
 //Testing find(data)
+// BST.find(14);
 
-BST.levelOrder();
+//Testing levelOrder with and without callback
+// function consoleLogging(node) {
+//   console.log(node);
+// }
+
+// BST.levelOrder();
+// BST.levelOrder(consoleLogging);
