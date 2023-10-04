@@ -72,8 +72,24 @@ export default class Tree {
       root = root.left;
       return root;
     }
+    // Case 2: Both children exist on node being deleted
+    else {
+      let successorParent = root;
+      let successor = root.right;
+      let temp = root.left;
+
+      while (successor.left !== null) {
+        successorParent = successor;
+        successor = successor.left;
+      }
+      console.log(`Successor identified as ${successor.data}`);
+
+      root = successor;
+      console.log(`New Root: ${root.data}`);
+      successor.left = temp;
+    }
+    return root;
   }
-  // Case 2: Both children exist on node being deleted
 }
 
 // Provided by TOP for tree visualization
@@ -95,6 +111,14 @@ const BST = new Tree(testArr);
 console.log(BST);
 prettyPrint(BST.root);
 
-BST.delete(23);
+BST.delete(67);
+console.log(BST);
+prettyPrint(BST.root);
+
+BST.delete(4);
+console.log(BST);
+prettyPrint(BST.root);
+
+BST.delete(9);
 console.log(BST);
 prettyPrint(BST.root);
