@@ -31,7 +31,7 @@ export default class Tree {
   }
 
   insertRec(root, data) {
-    if (root == null) {
+    if (root === null) {
       root = new Node(data);
       return root;
     }
@@ -44,6 +44,36 @@ export default class Tree {
 
     return root;
   }
+
+  delete(data) {
+    let root = this.root;
+    root = this.deleteRec(root, data);
+  }
+
+  deleteRec(root, data) {
+    if (root === null) {
+      return root;
+    }
+    // Recursively traverse BST until below conditions can't be met i.e. node data = searched data
+    if (root.data > data) {
+      root.left = this.deleteRec(root.left, data);
+      return root;
+    } else if (root.data < data) {
+      root.right = this.deleteRec(root.right, data);
+      return root;
+    }
+
+    // Case 1: One child exists on node being deleted
+    console.log(`Found match: ${root.data} === ${data}, processing deletion`);
+    if (root.left === null) {
+      root = root.right;
+      return root;
+    } else if (root.right === null) {
+      root = root.left;
+      return root;
+    }
+  }
+  // Case 2: Both children exist on node being deleted
 }
 
 // Provided by TOP for tree visualization
@@ -61,5 +91,10 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-BST.insert(45);
+// BST.insert(45);
+console.log(BST);
+prettyPrint(BST.root);
+
+BST.delete(23);
+console.log(BST);
 prettyPrint(BST.root);
