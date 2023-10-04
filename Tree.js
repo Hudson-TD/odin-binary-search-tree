@@ -121,7 +121,7 @@ export default class Tree {
         if (cb) cb(node);
       }
     }
-    return console.log(results);
+    if (!cb) return console.log(results);
   }
 }
 
