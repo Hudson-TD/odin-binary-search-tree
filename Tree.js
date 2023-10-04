@@ -90,7 +90,7 @@ export default class Tree {
     }
     return root;
   }
-  // Recursive search for passed value param starting at head
+  // Recursive search for passed data param starting at head
   find(data, root = this.root) {
     const node = root;
     if (node === null) return console.log("Not found");
@@ -100,6 +100,28 @@ export default class Tree {
         : this.find(data, node.left);
     }
     return console.log(`Node ${node.data} found`);
+  }
+
+  levelOrder(cb) {
+    if (this.root === null) return [];
+
+    const queue = [this.root];
+    const results = [];
+    // While queue exists execute
+    while (queue.length !== 0) {
+      let treeSize = queue.length;
+      for (let i = 0; i < treeSize; i++) {
+        // Hold first node for processing, remove from queue
+        let node = queue.shift();
+        results.push(node.data);
+        // Check for children
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+        // If callback is implemented carry that out before returning to next queue item
+        if (cb) cb(node);
+      }
+    }
+    return console.log(results);
   }
 }
 
@@ -120,10 +142,10 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 const BST = new Tree(testArr);
 
 //General logging for visualization
-console.log(BST);
+// console.log(BST);
 prettyPrint(BST.root);
 
-BST.find(14);
+// BST.find(14);
 
 // Testing insert(data), delete(data)
 // BST.insert(69);
@@ -134,3 +156,5 @@ BST.find(14);
 // prettyPrint(BST.root);
 
 //Testing find(data)
+
+BST.levelOrder();
