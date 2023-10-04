@@ -90,6 +90,17 @@ export default class Tree {
     }
     return root;
   }
+  // Recursive search for passed value param starting at head
+  find(data, root = this.root) {
+    const node = root;
+    if (node === null) return console.log("Not found");
+    if (node.data !== data) {
+      return node.data < data
+        ? this.find(data, node.right)
+        : this.find(data, node.left);
+    }
+    return console.log(`Node ${node.data} found`);
+  }
 }
 
 // Provided by TOP for tree visualization
@@ -107,18 +118,19 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 };
 
 const BST = new Tree(testArr);
-// BST.insert(45);
+
+//General logging for visualization
 console.log(BST);
 prettyPrint(BST.root);
 
-BST.delete(67);
-console.log(BST);
-prettyPrint(BST.root);
+BST.find(14);
 
-BST.delete(4);
-console.log(BST);
-prettyPrint(BST.root);
+// Testing insert(data), delete(data)
+// BST.insert(69);
+// BST.insert(12);
+// BST.insert(100);
+// BST.delete(9);
+// console.log(BST);
+// prettyPrint(BST.root);
 
-BST.delete(9);
-console.log(BST);
-prettyPrint(BST.root);
+//Testing find(data)
