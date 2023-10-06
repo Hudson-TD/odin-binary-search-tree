@@ -102,7 +102,7 @@ export default class Tree {
     return console.log(`Node ${node.data} found`);
   }
 
-  levelOrder(cb) {
+  levelOrder(callback) {
     if (this.root === null) return [];
 
     const queue = [this.root];
@@ -118,11 +118,34 @@ export default class Tree {
         if (node.left) queue.push(node.left);
         if (node.right) queue.push(node.right);
         // If callback is implemented carry that out before returning to next queue item
-        if (cb) cb(node);
+        if (callback) callback(node);
       }
     }
-    if (!cb) return console.log(results);
+    if (!callback) return console.log(results);
   }
+
+  inOrder(root = this.root) {
+    const stack = [];
+    const results = [];
+    let node = root;
+
+    while (stack.length || node) {
+      while (node) {
+        stack.push(node);
+        console.log(`node pushed: ${node.data}`);
+        node = node.left;
+      }
+      node = stack.pop();
+      results.push(node.data);
+      node = node.right;
+    }
+
+    console.log(results);
+  }
+
+  preOrder(callback) {}
+
+  postOrder(callback) {}
 }
 
 // Provided by TOP for tree visualization
@@ -163,3 +186,5 @@ prettyPrint(BST.root);
 
 // BST.levelOrder();
 // BST.levelOrder(consoleLogging);
+
+BST.inOrder();
