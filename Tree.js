@@ -124,15 +124,14 @@ export default class Tree {
     if (!callback) return console.log(results);
   }
 
-  inOrder(root = this.root) {
+  inOrder(callback) {
     const stack = [];
     const results = [];
-    let node = root;
+    let node = this.root;
 
     while (stack.length || node) {
       while (node) {
         stack.push(node);
-        console.log(`node pushed: ${node.data}`);
         node = node.left;
       }
       node = stack.pop();
@@ -140,7 +139,13 @@ export default class Tree {
       node = node.right;
     }
 
-    console.log(results);
+    if (callback) {
+      results.forEach((entry) => {
+        callback(entry);
+      });
+    } else {
+      return console.log(results);
+    }
   }
 
   preOrder(callback) {}
@@ -180,11 +185,12 @@ prettyPrint(BST.root);
 // BST.find(14);
 
 //Testing levelOrder with and without callback
-// function consoleLogging(node) {
-//   console.log(node);
-// }
+function consoleLogging(node) {
+  console.log(node);
+}
 
 // BST.levelOrder();
 // BST.levelOrder(consoleLogging);
 
 BST.inOrder();
+BST.inOrder(consoleLogging);
