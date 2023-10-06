@@ -148,7 +148,25 @@ export default class Tree {
     }
   }
 
-  preOrder(callback) {}
+  preOrder(callback) {
+    const stack = [this.root];
+    const results = [];
+
+    while (stack.length) {
+      let node = stack.pop();
+      results.push(node.data);
+      if (node.right) stack.push(node.right);
+      if (node.left) stack.push(node.left);
+    }
+
+    if (callback) {
+      results.forEach((entry) => {
+        callback(entry);
+      });
+    } else {
+      return console.log(results);
+    }
+  }
 
   postOrder(callback) {}
 }
@@ -192,5 +210,8 @@ function consoleLogging(node) {
 // BST.levelOrder();
 // BST.levelOrder(consoleLogging);
 
-BST.inOrder();
-BST.inOrder(consoleLogging);
+// BST.inOrder();
+// BST.inOrder(consoleLogging);
+
+BST.preOrder();
+BST.preOrder(consoleLogging);
