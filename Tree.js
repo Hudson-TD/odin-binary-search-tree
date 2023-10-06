@@ -168,7 +168,28 @@ export default class Tree {
     }
   }
 
-  postOrder(callback) {}
+  postOrder(callback) {
+    const stack = [this.root];
+    const stackTwo = [];
+    let node;
+
+    while (stack.length) {
+      node = stack.pop();
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+      stackTwo.push(node.data);
+    }
+
+    const results = stackTwo.reverse();
+
+    if (callback) {
+      results.forEach((entry) => {
+        callback(entry);
+      });
+    } else {
+      return console.log(results);
+    }
+  }
 }
 
 // Provided by TOP for tree visualization
@@ -203,15 +224,21 @@ prettyPrint(BST.root);
 // BST.find(14);
 
 //Testing levelOrder with and without callback
-function consoleLogging(node) {
-  console.log(node);
-}
+// function consoleLogging(node) {
+//   console.log(node);
+// }
 
+// Breadth First Search
 // BST.levelOrder();
 // BST.levelOrder(consoleLogging);
 
+// Inorder (left>node>right) traversal of BST
 // BST.inOrder();
 // BST.inOrder(consoleLogging);
 
-BST.preOrder();
-BST.preOrder(consoleLogging);
+// Preorder (node>left>right) traversal of BST
+// BST.preOrder();
+// BST.preOrder(consoleLogging);
+
+// BST.postOrder();
+// BST.postOrder(consoleLogging);
